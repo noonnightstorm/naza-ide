@@ -5,4 +5,4 @@ app.use(function*() {
   this.body = 'Hello World';
 });
 
-app.listen(80);
+app.listen(process.env.PORT || 5000);
