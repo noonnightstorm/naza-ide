@@ -1,0 +1,17 @@
+{
+  "name": "naza-ide",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "koa": "^2.0.0"
+  },
+  "devDependencies": {
+    "koa": "~2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
