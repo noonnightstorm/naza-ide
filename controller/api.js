@@ -13,6 +13,7 @@ function getFileList(id) {
           resolve({
             data: rows.map(function(item) {
               return {
+                id: item.id,
                 parentId: item.parent_id,
                 name: item.name,
                 content: item.content,
