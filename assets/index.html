@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="//cdn.bootcss.com/jquery/3.0.0-beta1/jquery.js"></script>
+</head>
+
+<body>
+  <button class="getFileList">获取文件列表</button>
+  <button class="addFile">添加文件</button>
+  <button class="delFile">删除文件</button>
+  <script>
+  $(".getFileList").click(function() {
+    $.ajax({
+      url: "/api/getFileList",
+      method: "GET",
+      data: {
+        id: -1
+      }
+    }).then(function(data) {
+      console.log(data)
+    });
+  });
+  </script>
+</body>
+
+</html>

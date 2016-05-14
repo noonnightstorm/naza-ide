@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "koa": "^2.0.0"
+    "koa": "~1.2.0",
+    "koa-router": "~5.4.0",
+    "lodash": "~4.12.0",
+    "mysql": "~2.10.2"
   },
   "engines": {
     "node": "4.2.4"
   },
-  "devDependencies": {
-    "koa": "~2.0.0"
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
