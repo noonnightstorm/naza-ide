@@ -10,7 +10,7 @@ router.get("/login", function*(next) {
   this.body = yield readFileThunk(__dirname + '/assets/login.html');
 });
 
-router.post("/login", function*(next) {
+router.post("/api/login", function*(next) {
   var user = yield API.login({
     account: this.body.account,
     password: this.body.password
@@ -21,7 +21,7 @@ router.post("/login", function*(next) {
   this.body = user;
 });
 
-router.post("/signUp", function*(next) {
+router.post("/api/signUp", function*(next) {
   this.cookies.set('uid', user.uid, {
     httpOnly: true
   });

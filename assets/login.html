@@ -30,7 +30,7 @@
     var pwd = $(".signup-pwd").val();
     var name = $(".signup-name").val();
     $.ajax({
-      url: "/signUp",
+      url: "/api/signUp",
       method: "POST",
       data: {
         account: account,
@@ -46,7 +46,7 @@
     var account = $(".login-account").val();
     var pwd = $(".login-pwd").val();
     $.ajax({
-      url: "/login",
+      url: "/api/login",
       method: "POST",
       data: {
         account: account,
