@@ -11,6 +11,11 @@ router.get('/api/getFileList', function*(next) {
   this.body = yield API.getFileList(fileId);
 });
 
+router.get('/api/addFile', function*(next) {
+  var fileId = parseInt(_.get(this.request.query, "id") || -1);
+  this.body = "ok";
+});
+
 module.exports = router;
 
 
