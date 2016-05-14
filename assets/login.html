@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="//cdn.bootcss.com/jquery/3.0.0-beta1/jquery.js"></script>
+</head>
+
+<body>
+  <div>
+    <h2>注册</h2>
+    <label for="">账户：</label>
+    <input type="text" class="signup-account">
+    <label for="">密码：</label>
+    <input type="text" class="signup-pwd">
+    <label for="">名字：</label>
+    <input type="text" class="signup-name">
+    <button class="signup-submit">注册</button>
+  </div>
+  <div>
+    <h2>登陆</h2>
+    <input type="text" class="login-account">
+    <input type="text" class="login-pwd">
+    <button class="login-submit">登陆</button>
+  </div>
+  <script>
+  $(".signup-submit").click(function() {
+    var account = $(".signup-account").val();
+    var pwd = $(".signup-pwd").val();
+    var name = $(".signup-name").val();
+    $.ajax({
+      url: "/signUp",
+      method: "POST",
+      data: {
+        account: account,
+        password: pwd,
+        name: name
+      }
+    }).then(function(data) {
+      console.log(data);
+    });
+  });
+
+  $(".login-submit").click(function() {
+    var account = $(".login-account").val();
+    var pwd = $(".login-pwd").val();
+    $.ajax({
+      url: "/login",
+      method: "POST",
+      data: {
+        account: account,
+        password: pwd
+      }
+    }).then(function(data) {
+      console.log(data);
+    });
+  });
+  </script>
+</body>
+
+</html>

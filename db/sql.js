@@ -4,6 +4,7 @@ var CreateUser = [
   "create table if not exists user(",
   "id int(4) not null primary key auto_increment,",
   "name char(20) not null,",
+  "account char(20) not null,",
   "password char(20) not null",
   ");"
 ].join(" ");
@@ -34,9 +35,24 @@ var GetFileList = [
   "where user_file_link.parent_id={id};"
 ].join(" ");
 
+var Login = [
+  "select * from user where account={account} and password={password};"
+].join(" ");
+
+var CheckUserHasExits = [
+  "select * from user where account={account};"
+].join(" ");
+
+var SignUp = [
+  "INSERT INTO user (account,password,name) VALUES('{account}','{password}','{name}');"
+].join(" ");
+
 module.exports = {
   CreateUser: CreateUser,
   CreateFileList: CreateFileList,
   CreateUserFileLink: CreateUserFileLink,
-  GetFileList: GetFileList
+  GetFileList: GetFileList,
+  Login: Login,
+  SignUp: SignUp,
+  CheckUserHasExits: CheckUserHasExits
 }

@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "koa": "~1.2.0",
+    "koa-better-body": "~2.0.1",
     "koa-cors": "0.0.16",
     "koa-router": "~5.4.0",
     "lodash": "~4.12.0",
