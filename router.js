@@ -38,9 +38,13 @@ router.get('/api/getFileList', function*(next) {
   this.body = yield API.getFileList(fileId);
 });
 
-router.get('/api/addFile', function*(next) {
-  var fileId = parseInt(_.get(this.request.query, "id") || -1);
-  this.body = "ok";
+router.post('/api/addFile', function*(next) {
+  this.body = yield API.addFile({
+    uid: this.cookies.get("uid"),
+    parentId: this.body.parentId || -1,
+    name: this.body.name,
+    type: this.body.type
+  });
 });
 
 module.exports = router;

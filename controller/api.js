@@ -16,7 +16,6 @@ function getFileList(id) {
                 id: item.id,
                 parentId: item.parent_id,
                 name: item.name,
-                content: item.content,
                 type: item.type
               }
             })
@@ -31,6 +30,46 @@ function getFileList(id) {
 // 文件的增删查改
 function addFile(params) {
 
+
+  //先添加进file表
+  return new Promise(function(resolve, reject) {
+    var _sql = SQL.addFile
+      .replace("{name}", params.name)
+      .replace("{content}", params.content)
+      .replace("{type}", params.type);
+    pool.getConnection(function(err, connection) {
+      connection.query(_sql, function(err, rows) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve({
+            fileId: rows.insertId
+          });
+        }
+        connection.release();
+      });
+    });
+  }).then(function(data) {
+    return new Promise(function(resolve, reject) {
+      var _sql = SQL.addFileLink
+        .replace("{uid}", params.uid)
+        .replace("{fileId}", data.fileId)
+        .replace("{parentId}", params.parentId);
+      pool.getConnection(function(err, connection) {
+        connection.query(_sql, function(err, rows) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve({
+              fileId: data.fileId
+            });
+          }
+          connection.release();
+        });
+      });
+
+    });
+  });
 }
 
 function delFile(id) {
@@ -128,6 +167,7 @@ function _checkUserHasExits(account) {
 
 module.exports = {
   getFileList: getFileList,
+  addFile: addFile,
   login: login,
   signUp: signUp
 };

@@ -47,6 +47,14 @@ var SignUp = [
   "INSERT INTO user (account,password,name) VALUES('{account}','{password}','{name}');"
 ].join(" ");
 
+var addFileLink = [
+  "INSERT INTO user_file_link (uid,file_id,parent_id) VALUES('{uid}','{fileId}','{parentId}'); "
+].join(" ");
+
+var addFile = [
+  "INSERT INTO file (name,content,type) VALUES('{name}','{content}','{type}'); "
+].join(" ");
+
 module.exports = {
   CreateUser: CreateUser,
   CreateFileList: CreateFileList,
@@ -54,5 +62,7 @@ module.exports = {
   GetFileList: GetFileList,
   Login: Login,
   SignUp: SignUp,
+  addFileLink: addFileLink,
+  addFile: addFile,
   CheckUserHasExits: CheckUserHasExits
 }
