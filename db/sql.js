@@ -46,7 +46,7 @@ var Login = [
 ].join(" ");
 
 var CheckUserHasExits = [
-  "select * from user where account={account};"
+  "select * from user where account='{account}';"
 ].join(" ");
 
 var SignUp = [

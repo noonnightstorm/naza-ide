@@ -56,7 +56,7 @@
   $(".delFile").click(function() {
     var fileId = $(".del-file-id").val();
     $.ajax({
-      url: "/api/delFile",
+      url: "/api/delFile/" + fileId,
       method: "DELETE",
       data: {
         id: fileId

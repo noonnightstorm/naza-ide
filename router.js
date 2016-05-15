@@ -38,9 +38,9 @@ router.get('/api/getFileList', function*(next) {
   this.body = yield API.getFileList(fileId);
 });
 
-router.get('/api/delFile', function*(next) {
-  console.log(this.request.query);
-  console.log(this.body);
+router.delete('/api/delFile/:id', function*(next) {
+  var fileId = this.params.id;
+  API.delFile(fileId);
   this.body = "ok";
 });
 

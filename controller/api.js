@@ -29,8 +29,6 @@ function getFileList(id) {
 
 // 文件的增删查改
 function addFile(params) {
-
-
   //先添加进file表
   return new Promise(function(resolve, reject) {
     var _sql = SQL.addFile
@@ -73,7 +71,10 @@ function addFile(params) {
 }
 
 function delFile(id) {
-
+  //先查询子目录
+  getFileList(id).then(function(list) {
+    console.log(list);
+  });
 }
 
 function getFile(id) {
@@ -168,6 +169,7 @@ function _checkUserHasExits(account) {
 module.exports = {
   getFileList: getFileList,
   addFile: addFile,
+  delFile: delFile,
   login: login,
   signUp: signUp
 };
