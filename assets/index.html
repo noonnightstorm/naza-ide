@@ -40,6 +40,9 @@
     $.ajax({
       url: "/api/getFileList",
       method: "GET",
+      headers: {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.MQ.vEZkOCrQbb0tUaOcrT8pU21jFsIR_DeApQsJj5TkLok"
+      },
       data: {
         id: -1
       }
@@ -56,7 +59,7 @@
       method: "POST",
       headers: {
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.MQ.vEZkOCrQbb0tUaOcrT8pU21jFsIR_DeApQsJj5TkLok"
-      }
+      },
       data: {
         parentId: parentId,
         name: filename,
@@ -73,7 +76,7 @@
       method: "DELETE",
       headers: {
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.MQ.vEZkOCrQbb0tUaOcrT8pU21jFsIR_DeApQsJj5TkLok"
-      }
+      },
       data: {
         id: fileId
       }
@@ -91,7 +94,7 @@
       method: "PUT",
       headers: {
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.MQ.vEZkOCrQbb0tUaOcrT8pU21jFsIR_DeApQsJj5TkLok"
-      }
+      },
       data: {
         id: fileId,
         content: code,
