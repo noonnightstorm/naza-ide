@@ -41,10 +41,13 @@ router.post("/api/signUp", function*(next) {
 });
 
 router.get('/api/getFileList', function*(next) {
-  // console.log(this.cookies.get("uid"));
   console.log(this.request.header);
+  var uid = parseInt(JWT.decode(this.request.token));
   var fileId = parseInt(_.get(this.request.query, "id") || -1);
-  this.body = yield API.getFileList(fileId);
+  this.body = yield API.getFileList({
+    uid: uid,
+    fileId: fileId
+  });
 });
 
 router.get('/api/getFile', function*(next) {
@@ -59,9 +62,8 @@ router.delete('/api/delFile/:id', function*(next) {
 });
 
 router.post('/api/addFile', function*(next) {
-  console.log(this.cookies.get("uid"));
   this.body = yield API.addFile({
-    uid: this.cookies.get("uid"),
+    uid: JWT.decode(this.request.token),
     parentId: this.body.parentId || -1,
     name: this.body.name,
     type: this.body.type

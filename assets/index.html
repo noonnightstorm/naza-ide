@@ -35,6 +35,11 @@
     <input type="text" class="update-file-name">
     <button class="update-file-btn">确定</button>
   </div>
+  <div>
+    <label for="">获取文件信息id</label>
+    <input type="text" class="get-file-id">
+    <button class="getFile">获取文件信息</button>
+  </div>
   <script>
   $(".getFileList").click(function() {
     $.ajax({
@@ -103,6 +108,20 @@
     }).then(function(data) {
       console.log(data);
     });
+  });
+
+  $(".getFile").click(function() {
+    var fileId = $(".get-file-id").val();
+    $.ajax({
+      url: "/api/getFile",
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.MQ.vEZkOCrQbb0tUaOcrT8pU21jFsIR_DeApQsJj5TkLok"
+      },
+      data: {
+        id: fileId
+      }
+    })
   });
   </script>
 </body>

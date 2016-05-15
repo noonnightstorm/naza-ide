@@ -38,7 +38,7 @@ var GetFileList = [
   "select * from user_file_link",
   "inner join User on user_file_link.uid=User.id",
   "inner join file on user_file_link.file_id=file.id",
-  "where user_file_link.parent_id={id};"
+  "where user_file_link.parent_id={fileId} and User.id={uid};"
 ].join(" ");
 
 var Login = [
@@ -58,7 +58,7 @@ var SignUp = [
 ].join(" ");
 
 var getFile = [
-  "select * fron file where id={fileId};"
+  "select * from file where id='{fileId}';"
 ].join(" ");
 
 var addFileLink = [
@@ -83,6 +83,7 @@ module.exports = {
   CreateFileList: CreateFileList,
   CreateUserFileLink: CreateUserFileLink,
   GetFileList: GetFileList,
+  getFile: getFile,
   getUser: getUser,
   Login: Login,
   SignUp: SignUp,

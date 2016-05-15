@@ -4,9 +4,11 @@ var SQL = require("../db/sql");
 var JWT = require('./login/jwt');
 
 // 文件列表的获取
-function getFileList(id) {
+function getFileList(params) {
   return new Promise(function(resolve, reject) {
-    var _sql = SQL.GetFileList.replace("{id}", id);
+    var _sql = SQL.GetFileList
+      .replace("{fileId}", params.fileId)
+      .replace("{uid}", params.uid);
     pool.getConnection(function(err, connection) {
       connection.query(_sql, function(err, rows) {
         if (err) {
@@ -132,11 +134,14 @@ function getFile(id) {
   var _getFileSql = SQL.getFile.replace("{fileId}", id);
   return new Promise(function(resolve, reject) {
     pool.getConnection(function(err, connection) {
-      connection.query(_delFileSql, function(err, rows) {
+      connection.query(_getFileSql, function(err, rows) {
         if (err) {
           reject(err);
         } else {
-          resolve();
+          resolve({
+            code: 200,
+            data: rows[0]
+          });
         }
         connection.release();
       });
@@ -239,6 +244,7 @@ function _checkUserHasExits(account) {
 
 module.exports = {
   getFileList: getFileList,
+  getFile: getFile,
   addFile: addFile,
   delFile: delFile,
   login: login,
