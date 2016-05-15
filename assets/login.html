@@ -56,6 +56,13 @@
       console.log(data);
     });
   });
+
+  $.ajax({
+    url: "/api/withoutLogin",
+    method: "GET"
+  }).then(function(data) {
+    console.log(data);
+  });
   </script>
 </body>
 

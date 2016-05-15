@@ -29,6 +29,7 @@ function getFileList(id) {
 
 // 文件的增删查改
 function addFile(params) {
+  console.log(params);
   //先添加进file表
   return new Promise(function(resolve, reject) {
     var _sql = SQL.addFile
@@ -178,8 +179,11 @@ function login(param) {
             });
           } else {
             resolve({
-              uid: rows[0].id,
-              name: rows[0].name
+              code: "200",
+              data: {
+                uid: rows[0].id,
+                name: rows[0].name
+              }
             });
           }
         }
