@@ -61,6 +61,14 @@ var addFile = [
   "INSERT INTO file (name,content,type) VALUES('{name}','{content}','{type}'); "
 ].join(" ");
 
+var delLink = [
+  "delete from user_file_link where file_id='{fileId}'; "
+].join(" ");
+
+var delFile = [
+  "delete from file where id='{fileId}'; "
+].join(" ");
+
 module.exports = {
   DeleteData: DeleteData,
   CreateUser: CreateUser,
@@ -71,5 +79,7 @@ module.exports = {
   SignUp: SignUp,
   addFileLink: addFileLink,
   addFile: addFile,
+  delLink: delLink,
+  delFile: delFile,
   CheckUserHasExits: CheckUserHasExits
 }

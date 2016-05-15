@@ -72,8 +72,50 @@ function addFile(params) {
 
 function delFile(id) {
   //先查询子目录
-  getFileList(id).then(function(list) {
-    console.log(list);
+  return getFileList(id).then(function(list) {
+    // console.log(list);
+    var ids = list.data.map(function(item) {
+      return item.id;
+    });
+    ids.push(id);
+    return ids;
+  }).then(function(ids) {
+    var queue = [];
+    ids.forEach(function(id) {
+      // del link first
+      var _delLinkPromise = new Promise(function(resolve, reject) {
+        var _delLinkSql = SQL.delLink.replace("{fileId}", id);
+        pool.getConnection(function(err, connection) {
+          connection.query(_delLinkSql, function(err, rows) {
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+            connection.release();
+          });
+        });
+      });
+      // del file next
+      var _delFilePromise = new Promise(function(resolve, reject) {
+        var _delFileSql = SQL.delFile.replace("{fileId}", id);
+        pool.getConnection(function(err, connection) {
+          connection.query(_delFileSql, function(err, rows) {
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+            connection.release();
+          });
+        });
+      });
+
+      queue.push(_delLinkPromise);
+      queue.push(_delFilePromise);
+    });
+
+    return Promise.all(queue);
   });
 }
 
