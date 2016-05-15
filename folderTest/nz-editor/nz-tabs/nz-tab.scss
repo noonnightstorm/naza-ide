@@ -1,0 +1,12 @@
+:host.nz-tab-pane{
+  display:none;
+}
+:host.nz-tab-pane.active {
+  display: block;
+  border-left: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+}
+.nz-tab-content{
+  height: 100%;
+  position: relative;
+}

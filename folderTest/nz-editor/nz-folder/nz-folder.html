@@ -1,0 +1,22 @@
+<div class="nz-tree-warp">
+  <div class="nz-tree-inner">
+    <ul class="nav nav-list nav-pills nav-stacked nz-tree">
+      <li
+      *ngFor="let branch of branches"
+      [ngClass]="(branch.selected? 'active': '') + ' ' + (branch.hidden? 'hide': '') + ' ' + branch.icon"
+      class="nz-tree-row"
+      >
+        <a class="indented nz-tree-branch" [style.paddingLeft]="branch.level * 20 + 'px'"
+          (click)="nzBranchClick(branch, $event)"
+        >
+          <i class="nz-tree-icon indented"
+          (click)="nzBranchDblclick(branch, $event)"
+          > </i>
+          <span class="nz-tree-branch-text">
+            <span class="nz-tree-label">{{branch.name}}</span>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

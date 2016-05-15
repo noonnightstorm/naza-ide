@@ -1,0 +1,27 @@
+
+.form-wrap{
+  margin-bottom:15px;
+  label{
+    display: inline-block;
+    width: 100px;
+  }
+}
+.form-input{
+  width: calc( 100% - 105px );
+  background-color: #ffffff;
+  border: 1px solid #dedede;
+  border-radius: 0px;
+  box-shadow: none;
+  color: #565656;
+  height: 38px;
+  max-width: 100%;
+  padding: 7px 12px;
+}
+.form-error-message{
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+

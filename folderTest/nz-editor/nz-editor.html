@@ -1,0 +1,80 @@
+<div class="nz-editor-sidebar">
+  <div class="sidebar-header">
+    <div class="user">
+      <div class="logo-icon">
+
+      </div>
+      <div class="user-name">
+        {{user&&user.name}}
+      </div>
+    </div>
+  </div>
+  <div class="sidebar-main">
+    <nz-folder [nzCollection]="treeCollection" (nzClick)="folderClick($event)" (nzDblclick)="folderDblclick($event)" (nzChange)="folderChange()"></nz-folder>
+  </div>
+</div>
+
+<div class="nz-editor-main">
+  <div class="nz-editor-menu">
+    <div class="menu-button-list">
+      <div class="edit">
+        <div class="menu-button" (click)="newFile(currentWorkspace)">
+          <i class="nz-iconfont icon-edit"></i>
+          New
+        </div>
+        <div class="menu-button" (click)="triggerFind(currentWorkspace)">
+          <i class="nz-iconfont icon-search"></i>
+          Find
+        </div>
+        <div class="menu-button" (click)="triggerUndo(currentWorkspace)">
+          <i class="nz-iconfont icon-swapleft"></i>
+          Undo
+        </div>
+        <div class="menu-button" (click)="triggerRedo(currentWorkspace)">
+          <i class="nz-iconfont icon-swapright"></i>
+          Redo
+        </div>
+      </div>
+      <div class="theme">
+        <div class="menu-button select">
+          <select [ngModel]="aceConfig.fontSize" (ngModelChange)="changeFontSize($event)">
+            <option *ngFor="let size of fontSizeList" [value]="size">{{size}}</option>
+          </select>
+        </div>
+        <div class="menu-button">
+          <span class="theme-icon sun" [class.active]="!isDarkTheme" (click)="changeTheme(false)"></span>
+          <nz-switch [nzValue]="isDarkTheme" (nzValueChange)="changeTheme($event)"></nz-switch>
+          <span class="theme-icon moon" [class.active]="isDarkTheme" (click)="changeTheme(true)"></span>
+        </div>
+      </div>
+      <div class="file">
+        <div class="menu-button right danger" (click)="deleteFile(currentWorkspace)">
+          <i class="nz-iconfont icon-delete"></i>
+          Delete
+        </div>
+        <div class="menu-button right" (click)="saveFile(currentWorkspace)">
+          <i class="nz-iconfont icon-save"></i>
+          Save
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <nz-tabset class="nz-editor-tabset">
+    <nz-tab *ngFor="let workspace of workspaces"
+            [active]="workspace.active"
+            (nzSelect)="activeWorkspace(workspace)"
+            (nzDeselect)="workspace.active = false">
+      <template nzTabHeading>
+        <i class="file-iconfont icon-js nz-editor-file-icon"></i>
+        <span class="nz-editor-title">{{workspace.title}}</span>
+        <i class="nz-iconfont icon-cross nz-editor-close-icon" (click)="closeWorkspace(workspace)"></i>
+      </template>
+      <nz-ace #nzAce="nzAce" (aceInstance)="workspace.instance = $event" [aceCode]="workspace.code" (aceCodeChange)="workspace.code=$event" [aceConfig]="aceConfig"></nz-ace>
+    </nz-tab>
+  </nz-tabset>
+</div>
+
+
+<nz-modal [(nzModalType)]="modalType" (modalResolve)="handlerModal($event)"></nz-modal>

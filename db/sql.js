@@ -19,8 +19,8 @@ var CreateUser = [
 var CreateFileList = [
   "create table if not exists file(",
   "id int(4) not null primary key auto_increment,",
-  "name char(20) not null,",
-  "content text,",
+  "name char(40) not null,",
+  "content longtext,",
   "type int(2)",
   ");"
 ].join(" ");

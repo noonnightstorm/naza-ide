@@ -1,0 +1,118 @@
+/* ------------------------------------------
+AngularJS Animations...
+
+The first selector is for Angular 1.1.5
+The second selector is for Angular 1.2.0
+
+*/
+
+
+.nz-tree-warp{
+  -webkit-user-select: none;
+  display: inline-block;
+}
+.nz-tree a {
+  color:#555;
+  font-size:12px;
+}
+.nz-tree.nav-pills > li > a:hover{
+  border-radius: 0;
+}
+.nz-tree.nav-pills > li.active > a, .nz-tree.nav-pills > li.active > a:hover, .nz-tree.nav-pills > li.active > a:focus{
+  border-radius: 0;
+  background-color:#9e9c9c;
+  color: white;
+}
+.nz-tree.nav-pills > li{
+  line-height: 30px;
+  height:30px;
+}
+.nz-tree.nav-pills > li > a{
+  line-height: 30px;
+  height:30px;
+  padding:0px 10px;
+}
+
+.nz-tree.nav-pills > li > a.nz-tree-branch{
+  white-space: nowrap;
+}
+
+.nz-tree.nav-pills > li > a .label{
+  background-color: #ccc;
+  padding: .2em .6em .2em;
+}
+
+.nz-tree.nav-pills > li > a .label-success{
+  background-color: #66cc00;
+}
+
+.nz-tree.nav-pills > li.active > a .label,
+.nz-tree.nav-pills > li.active > a:hover .label,
+.nz-tree.nav-pills > li.active > a:focus .label{
+  background-color: #5bc0de;
+}
+
+.nz-tree-inner{
+  width: 100%;
+  height: 100%;
+  padding: 5px 0px;
+  overflow: auto;
+}
+ul.nz-tree li.nz-tree-row {
+  min-width: 300px;
+}
+.nz-tree-animate-enter,
+li.nz-tree-row.ng-enter {
+  -webkit-transition: 200ms linear all;
+  transition: 200ms linear all;
+  opacity: 0;
+}
+.nz-tree-animate-enter.nz-tree-animate-enter-active,
+li.nz-tree-row.ng-enter-active{
+  opacity: 1;
+}
+
+.nz-tree-animate-leave,
+li.nz-tree-row.ng-leave {
+  -webkit-transition: 200ms linear all;
+  transition: 200ms linear all;
+  opacity: 1;
+}
+.nz-tree-animate-leave.nz-tree-animate-leave-active,
+li.nz-tree-row.ng-leave-active {
+  opacity: 0;
+}
+
+ul.nz-tree{
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-block;
+  min-width: 100%;
+}
+ul.nz-tree li.nz-tree-row {
+  list-style: none;
+}
+ul.nz-tree li.nz-tree-row > a{
+  display: block;
+}
+
+.indented.nz-tree-label {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  bottom: 1px;
+}
+ul.nav.nz-tree .indented{
+  position: relative;
+}
+ul.nav.nav-list.nz-tree .nz-tree-icon{
+  padding: 2px 26px 0 0;
+  background-size:18px 14px;
+}
+
+ul.nz-tree li.nz-tree-row.context{
+  border: 1px solid #0066CC;
+}
+ul.nz-tree li.nz-tree-row.active.context{
+  border: 0 none;
+}

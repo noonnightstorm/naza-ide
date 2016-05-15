@@ -1,0 +1,52 @@
+.nz-tab-container{
+  height: 100%;
+  display:block;
+}
+.nz-nav-tabs {
+  display: flex;
+  display: -webkit-flex;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+  overflow: hidden;
+  height:40px;
+  border-bottom: 1px solid #dddddd;
+}
+.nz-nav-tabs > li {
+  float: left;
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+.nz-nav-tabs > li > a, .nz-nav-tabs > li > a:hover, .nz-nav-tabs > li > a:focus {
+  color: #CACACA;
+  background-color: #ffffff;
+  cursor: default;
+  margin-right: 2px;
+  max-width: 300px;
+  min-width: 80px;
+  height: 38px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: center;
+  line-height: 38px;
+}
+.nz-nav-tabs > li:first-child > a{
+  border-left-color: #dddddd;
+}
+.nz-nav-tabs > li.active > a, .nz-nav-tabs > li.active > a:hover, .nz-nav-tabs > li.active > a:focus {
+  color: #555555;
+  background-color: #ffffff;
+  border-left-color: #dddddd;
+  border-right-color: #dddddd;
+  cursor: default;
+}
+
+.nz-nav-tabs:before, .nz-nav-tabs:after{
+  clear: both;
+  content: " ";
+  display: table;
+}
