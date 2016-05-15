@@ -59,8 +59,7 @@ router.get('/api/getFile', function*(next) {
 
 router.delete('/api/delFile/:id', function*(next) {
   var fileId = this.params.id;
-  API.delFile(fileId);
-  this.body = "ok";
+  this.body = yield API.delFile(fileId);
 });
 
 router.post('/api/addFile', function*(next) {

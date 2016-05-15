@@ -39,7 +39,7 @@ function addFile(params) {
   return new Promise(function(resolve, reject) {
     var _sql = SQL.addFile
       .replace("{name}", params.name)
-      .replace("{content}", params.content)
+      .replace("{content}", params.content || "")
       .replace("{type}", params.type);
     pool.getConnection(function(err, connection) {
       connection.query(_sql, function(err, rows) {
@@ -124,7 +124,11 @@ function delFile(id) {
       queue.push(_delFilePromise);
     });
 
-    return Promise.all(queue);
+    return Promise.all(queue).then(function() {
+      return {
+        code: 200
+      }
+    })
   });
 }
 
@@ -159,7 +163,7 @@ function updateFile(params) {
     var file = _.extend({}, data.data, params);
     var _updateFileSql = SQL.updateFile
       .replace("{name}", file.name)
-      .replace("{content}", Tool.encodeCode(file.content))
+      .replace("{content}", Tool.encodeCode(file.content || ""))
       .replace("{fileId}", file.id);
     return new Promise(function(resolve, reject) {
       pool.getConnection(function(err, connection) {
