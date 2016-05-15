@@ -25,7 +25,7 @@ app.use(function*(next) {
         break;
       }
     }
-    if (!this.request.token) {
+    if (!this.request.token && !isExcept) {
       this.body = {
         code: 10000,
         errMsg: "登录失效"
