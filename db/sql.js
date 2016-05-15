@@ -42,7 +42,7 @@ var GetFileList = [
 ].join(" ");
 
 var Login = [
-  "select * from user where account={account} and password={password};"
+  "select * from user where account='{account}' and password='{password}';"
 ].join(" ");
 
 var CheckUserHasExits = [
@@ -51,6 +51,10 @@ var CheckUserHasExits = [
 
 var SignUp = [
   "INSERT INTO user (account,password,name) VALUES('{account}','{password}','{name}');"
+].join(" ");
+
+var getFile = [
+  "select * fron file where id={fileId};"
 ].join(" ");
 
 var addFileLink = [

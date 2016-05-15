@@ -38,6 +38,11 @@ router.get('/api/getFileList', function*(next) {
   this.body = yield API.getFileList(fileId);
 });
 
+router.get('/api/getFile', function*(next) {
+  var fileId = parseInt(_.get(this.request.query, "id") || -1);
+  this.body = yield API.getFile(fileId);
+});
+
 router.delete('/api/delFile/:id', function*(next) {
   var fileId = this.params.id;
   API.delFile(fileId);
@@ -51,6 +56,15 @@ router.post('/api/addFile', function*(next) {
     name: this.body.name,
     type: this.body.type
   });
+});
+
+router.put('/api/updateFile', function*(next) {
+  yield API.updateFile({
+    id: this.body.id,
+    name: this.body.name,
+    content: this.body.content
+  });
+  this.body = "ok";
 });
 
 module.exports = router;

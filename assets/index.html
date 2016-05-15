@@ -25,6 +25,16 @@
     <input type="text" class="del-file-id">
     <button class="delFile">删除文件</button>
   </div>
+  <div>
+    <label for="">更新文件</label>
+    <label for="">代码</label>
+    <textarea name="" id="" cols="30" rows="10" class="update-file-code"></textarea>
+    <label for="">文件id</label>
+    <input type="text" class="update-file-id">
+    <label for="">名字</label>
+    <input type="text" class="update-file-name">
+    <button class="update-file-btn">确定</button>
+  </div>
   <script>
   $(".getFileList").click(function() {
     $.ajax({
@@ -60,6 +70,23 @@
       method: "DELETE",
       data: {
         id: fileId
+      }
+    }).then(function(data) {
+      console.log(data);
+    });
+  });
+
+  $(".update-file-btn").click(function() {
+    var fileId = $(".update-file-id").val();
+    var code = $(".update-file-code").val();
+    var filename = $(".update-file-name").val();
+    $.ajax({
+      url: "/api/updateFile/",
+      method: "PUT",
+      data: {
+        id: fileId,
+        content: code,
+        name: filename
       }
     }).then(function(data) {
       console.log(data);

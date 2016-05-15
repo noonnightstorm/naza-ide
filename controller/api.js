@@ -120,10 +120,22 @@ function delFile(id) {
 }
 
 function getFile(id) {
-
+  var _getFileSql = SQL.getFile.replace("{fileId}", id);
+  return new Promise(function(resolve, reject) {
+    pool.getConnection(function(err, connection) {
+      connection.query(_delFileSql, function(err, rows) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+        connection.release();
+      });
+    });
+  });
 }
 
-function updateFile(id) {
+function updateFile(params) {
 
 }
 
