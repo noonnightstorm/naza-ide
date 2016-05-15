@@ -18,8 +18,13 @@
     <input type="text" class="filename">
     <label for="">类型</label>
     <input type="text" class="filetype">
+    <button class="addFile">添加文件</button>
   </div>
-  <button class="addFile">添加文件</button>
+  <div>
+    <label for="">fileId</label>
+    <input type="text" class="del-file-id">
+    <button class="delFile">删除文件</button>
+  </div>
   <script>
   $(".getFileList").click(function() {
     $.ajax({
@@ -43,6 +48,18 @@
         parentId: parentId,
         name: filename,
         type: filetype
+      }
+    }).then(function(data) {
+      console.log(data);
+    });
+  });
+  $(".delFile").click(function() {
+    var fileId = $(".del-file-id").val();
+    $.ajax({
+      url: "/api/delFile",
+      method: "DELETE",
+      data: {
+        id: fileId
       }
     }).then(function(data) {
       console.log(data);

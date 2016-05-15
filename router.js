@@ -38,6 +38,12 @@ router.get('/api/getFileList', function*(next) {
   this.body = yield API.getFileList(fileId);
 });
 
+router.get('/api/delFile', function*(next) {
+  console.log(this.request.query);
+  console.log(this.body);
+  this.body = "ok";
+});
+
 router.post('/api/addFile', function*(next) {
   this.body = yield API.addFile({
     uid: this.cookies.get("uid"),

@@ -1,5 +1,11 @@
 "use strict";
 
+var DeleteData = [
+  "drop table user;",
+  "drop table file;",
+  "drop table user_file_link;"
+];
+
 var CreateUser = [
   "create table if not exists user(",
   "id int(4) not null primary key auto_increment,",
@@ -56,6 +62,7 @@ var addFile = [
 ].join(" ");
 
 module.exports = {
+  DeleteData: DeleteData,
   CreateUser: CreateUser,
   CreateFileList: CreateFileList,
   CreateUserFileLink: CreateUserFileLink,
