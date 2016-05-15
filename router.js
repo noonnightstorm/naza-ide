@@ -10,6 +10,18 @@ router.get("/login", function*(next) {
   this.body = yield readFileThunk(__dirname + '/assets/login.html');
 });
 
+router.get("/withoutLogin", function*(next) {
+  var uid = this.cookies.get("uid");
+  if (uid) {
+    this.body = yield API.withoutLogin(uid);
+  } else {
+    this.body = {
+      code: 10000,
+      errMsg: "登录失败"
+    }
+  }
+});
+
 router.post("/api/login", function*(next) {
   var user = yield API.login({
     account: this.body.account,

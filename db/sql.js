@@ -45,6 +45,10 @@ var Login = [
   "select * from user where account='{account}' and password='{password}';"
 ].join(" ");
 
+var getUser = [
+  "select * from user where id='{uid}' ;"
+].join(" ");
+
 var CheckUserHasExits = [
   "select * from user where account='{account}';"
 ].join(" ");
@@ -79,6 +83,7 @@ module.exports = {
   CreateFileList: CreateFileList,
   CreateUserFileLink: CreateUserFileLink,
   GetFileList: GetFileList,
+  getUser: getUser,
   Login: Login,
   SignUp: SignUp,
   addFileLink: addFileLink,

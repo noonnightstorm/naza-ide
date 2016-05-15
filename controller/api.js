@@ -139,6 +139,24 @@ function updateFile(params) {
 
 }
 
+//免登接口
+function withoutLogin(id) {
+  return new Promise(function(resolve, reject) {
+    var _getUserSql = SQL.getUser.replace("{uid}", id);
+    pool.getConnection(function(err, connection) {
+      connection.query(_getUserSql, function(err, rows) {
+        if (err) {
+          reject(err);
+        } else {
+          console.log(rows);
+          resolve();
+        }
+        connection.release();
+      });
+    });
+  });
+}
+
 //登陆
 function login(param) {
   return new Promise(function(resolve, reject) {
@@ -224,6 +242,7 @@ module.exports = {
   getFileList: getFileList,
   addFile: addFile,
   delFile: delFile,
+  withoutLogin: withoutLogin,
   login: login,
   signUp: signUp
 };
