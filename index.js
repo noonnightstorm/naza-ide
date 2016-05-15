@@ -20,7 +20,7 @@ app.use(function*(next) {
     ];
     var isExcept = false;
     for (var i = 0; i < exceptUrl.length; i++) {
-      if (this.request.path.indexOf(exceptUrl[i]) !== 0) {
+      if (this.request.path.indexOf(exceptUrl[i]) !== -1) {
         isExcept = true;
         break;
       }

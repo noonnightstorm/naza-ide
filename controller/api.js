@@ -1,6 +1,6 @@
 var pool = require("../db/pool");
 var SQL = require("../db/sql");
-
+var _ = require("lodash");
 var JWT = require('./login/jwt');
 
 // 文件列表的获取
@@ -84,7 +84,6 @@ function addFile(params) {
 function delFile(id) {
   //先查询子目录
   return getFileList(id).then(function(list) {
-    // console.log(list);
     var ids = list.data.map(function(item) {
       return item.id;
     });
@@ -131,11 +130,18 @@ function delFile(id) {
 }
 
 function getFile(id) {
+  if (!id) {
+    return Promise.resolve({
+      code: 11000,
+      errMsg: "请输入查询文件的id"
+    });
+  }
+  id = parseInt(id);
   var _getFileSql = SQL.getFile.replace("{fileId}", id);
   return new Promise(function(resolve, reject) {
     pool.getConnection(function(err, connection) {
       connection.query(_getFileSql, function(err, rows) {
-        if (err) {
+        if (err || rows.length === 0) {
           reject(err);
         } else {
           resolve({
@@ -150,7 +156,28 @@ function getFile(id) {
 }
 
 function updateFile(params) {
-
+  return getFile(params.id).then(function(data) {
+    var file = _.extend({}, data, params);
+    var _updateFileSql = SQL.updateFile
+      .replace("{name}", file.name)
+      .replace("{content}", file.content)
+      .replace("{fileId}", file.id);
+    return new Promise(function(resolve, reject) {
+      pool.getConnection(function(err, connection) {
+        connection.query(_updateFileSql, function(err, rows) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve({
+              code: 200,
+              data: file
+            });
+          }
+          connection.release();
+        });
+      });
+    });
+  });
 }
 
 //登陆
@@ -247,6 +274,7 @@ module.exports = {
   getFile: getFile,
   addFile: addFile,
   delFile: delFile,
+  updateFile: updateFile,
   login: login,
   signUp: signUp
 };

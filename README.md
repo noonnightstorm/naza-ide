@@ -53,6 +53,15 @@ result:
 }
 ```
 
+* get file info interface
+```
+path: /api/getFile
+method: GET
+param: {
+  id:1 
+}
+```
+
 * add file interface
 ```
 path: /api/addFile
@@ -70,5 +79,16 @@ path: /api/delFile/
 method: DELETE
 param: {
   id:,
+}
+```
+
+* update file interface
+```
+path: /api/updateFile
+method: PUT
+param: {
+  id: ,
+  name: ,
+  content: 
 }
 ```

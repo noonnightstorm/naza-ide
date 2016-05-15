@@ -51,7 +51,7 @@ router.get('/api/getFileList', function*(next) {
 });
 
 router.get('/api/getFile', function*(next) {
-  var fileId = parseInt(_.get(this.request.query, "id") || -1);
+  var fileId = _.get(this.request.query, "id");
   this.body = yield API.getFile(fileId);
 });
 

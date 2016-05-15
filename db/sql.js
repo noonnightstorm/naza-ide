@@ -77,6 +77,10 @@ var delFile = [
   "delete from file where id='{fileId}'; "
 ].join(" ");
 
+var updateFile = [
+  "update file set name='{name}',content='{content}' where id='{fileId}' ;"
+].join(" ");
+
 module.exports = {
   DeleteData: DeleteData,
   CreateUser: CreateUser,
@@ -91,5 +95,6 @@ module.exports = {
   addFile: addFile,
   delLink: delLink,
   delFile: delFile,
+  updateFile: updateFile,
   CheckUserHasExits: CheckUserHasExits
 }
