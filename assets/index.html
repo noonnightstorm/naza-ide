@@ -45,6 +45,9 @@
     $.ajax({
       url: "/api/getFileList",
       method: "GET",
+      headers: {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.MQ.vEZkOCrQbb0tUaOcrT8pU21jFsIR_DeApQsJj5TkLok"
+      },
       data: {
         id: -1
       }

@@ -24,6 +24,11 @@
     <input type="text" class="login-pwd">
     <button class="login-submit">登陆</button>
   </div>
+  <div>
+    <label for="">修改用户cache</label>
+    <input type="text" class="user-cache">
+    <button class="user-cache-btn">保存</button>
+  </div>
   <script>
   $(".signup-submit").click(function() {
     var account = $(".signup-account").val();
@@ -51,6 +56,22 @@
       data: {
         account: account,
         password: pwd
+      }
+    }).then(function(data) {
+      console.log(data);
+    });
+  });
+
+  $(".user-cache-btn").click(function() {
+    var cache = $(".user-cache").val();
+    $.ajax({
+      url: "/api/updateUserCache",
+      method: "PUT",
+      headers: {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.MQ.vEZkOCrQbb0tUaOcrT8pU21jFsIR_DeApQsJj5TkLok"
+      },
+      data: {
+        cache: cache
       }
     }).then(function(data) {
       console.log(data);

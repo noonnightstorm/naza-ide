@@ -11,7 +11,8 @@ var CreateUser = [
   "id int(4) not null primary key auto_increment,",
   "name char(20) not null,",
   "account char(20) not null,",
-  "password char(20) not null",
+  "password char(20) not null,",
+  "cache text",
   ");"
 ].join(" ");
 
@@ -57,6 +58,10 @@ var SignUp = [
   "INSERT INTO user (account,password,name) VALUES('{account}','{password}','{name}');"
 ].join(" ");
 
+var updateUserCache = [
+  "update user set cache='{cache}' where id='{uid}' ;"
+].join(" ");
+
 var getFile = [
   "select * from file where id='{fileId}';"
 ].join(" ");
@@ -91,6 +96,7 @@ module.exports = {
   getUser: getUser,
   Login: Login,
   SignUp: SignUp,
+  updateUserCache: updateUserCache,
   addFileLink: addFileLink,
   addFile: addFile,
   delLink: delLink,

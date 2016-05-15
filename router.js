@@ -40,8 +40,15 @@ router.post("/api/signUp", function*(next) {
   this.body = user;
 });
 
+router.put("/api/updateUserCache", function*(next) {
+  var uid = parseInt(JWT.decode(this.request.token));
+  this.body = yield API.updateUserCache({
+    uid: uid,
+    cache: this.body.cache
+  });
+});
+
 router.get('/api/getFileList', function*(next) {
-  console.log(this.request.header);
   var uid = parseInt(JWT.decode(this.request.token));
   var fileId = parseInt(_.get(this.request.query, "id") || -1);
   this.body = yield API.getFileList({
@@ -71,12 +78,11 @@ router.post('/api/addFile', function*(next) {
 });
 
 router.put('/api/updateFile', function*(next) {
-  yield API.updateFile({
+  this.body = yield API.updateFile({
     id: this.body.id,
     name: this.body.name,
     content: this.body.content
   });
-  this.body = "ok";
 });
 
 module.exports = router;

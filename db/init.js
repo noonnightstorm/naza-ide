@@ -79,4 +79,5 @@ function createLinkTable(pool) {
 
 }
 
+
 module.exports = init;

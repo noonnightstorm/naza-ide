@@ -30,6 +30,15 @@ param: {
 }
 ```
 
+* update user state cache interface
+```
+path: /api/updateFile
+method: PUT
+param: {
+  cache: 
+}
+```
+
 
 ### File
 

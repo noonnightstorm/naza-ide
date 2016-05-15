@@ -46,10 +46,7 @@ function addFile(params) {
           reject(err);
         } else {
           resolve({
-            code: 200,
-            data: {
-              fileId: rows.insertId
-            }
+            fileId: rows.insertId
           });
         }
         connection.release();
@@ -157,7 +154,7 @@ function getFile(id) {
 
 function updateFile(params) {
   return getFile(params.id).then(function(data) {
-    var file = _.extend({}, data, params);
+    var file = _.extend({}, data.data, params);
     var _updateFileSql = SQL.updateFile
       .replace("{name}", file.name)
       .replace("{content}", file.content)
@@ -205,6 +202,7 @@ function login(param) {
               data: {
                 uid: rows[0].id,
                 name: rows[0].name,
+                cache: rows[0].cache,
                 token: JWT.encode(rows[0].id)
               }
             });
@@ -238,6 +236,7 @@ function signUp(params) {
               data: {
                 uid: rows.insertId,
                 name: params.name,
+                cache: "",
                 token: JWT.encode(rows.insertId)
               }
             });
@@ -247,7 +246,6 @@ function signUp(params) {
       })
     }
   });
-
 }
 
 function _checkUserHasExits(account) {
@@ -267,6 +265,29 @@ function _checkUserHasExits(account) {
 }
 
 
+function updateUserCache(params) {
+  var _sql = SQL.updateUserCache
+    .replace("{uid}", params.uid)
+    .replace("{cache}", params.cache);
+  return new Promise(function(resolve, reject) {
+    pool.getConnection(function(err, connection) {
+      connection.query(_sql, function(err, rows) {
+        if (err) {
+          resolve({
+            code: 10003,
+            errMsg: "更新cache失败"
+          });
+        } else {
+          resolve({
+            code: 200
+          });
+        }
+        connection.release();
+      });
+    });
+  });
+}
+
 
 
 module.exports = {
@@ -276,5 +297,6 @@ module.exports = {
   delFile: delFile,
   updateFile: updateFile,
   login: login,
-  signUp: signUp
+  signUp: signUp,
+  updateUserCache: updateUserCache
 };
