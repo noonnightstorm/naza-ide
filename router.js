@@ -22,13 +22,13 @@ router.post("/api/login", function*(next) {
 });
 
 router.post("/api/signUp", function*(next) {
-  this.cookies.set('uid', user.uid, {
-    httpOnly: true
-  });
   var user = yield API.signUp({
     name: this.body.name,
     account: this.body.account,
     password: this.body.password
+  });
+  this.cookies.set('uid', user.uid, {
+    httpOnly: true
   });
   this.body = user;
 });
