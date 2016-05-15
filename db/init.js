@@ -4,13 +4,13 @@ var SQL = require("./sql");
 
 function init(pool) {
   //先清除数据
-  // deleteData(pool);
+  deleteData(pool);
   //生成用户表格
-  createUserTable(pool);
+  // createUserTable(pool);
   //生成文件表格
-  createFileTable(pool);
+  // createFileTable(pool);
   //生成用户－文件的表格
-  createLinkTable(pool);
+  // createLinkTable(pool);
 }
 
 function deleteData(pool) {

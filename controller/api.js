@@ -152,11 +152,19 @@ function withoutLogin(id) {
     var _getUserSql = SQL.getUser.replace("{uid}", id);
     pool.getConnection(function(err, connection) {
       connection.query(_getUserSql, function(err, rows) {
-        if (err) {
-          reject(err);
+        if (err || rows.length === 0) {
+          reject({
+            code: 10000,
+            errMsg: "登录失败"
+          });
         } else {
-          console.log(rows);
-          resolve();
+          resolve({
+            code: 200,
+            data: {
+              id: rows[0].id,
+              name: rows[0].name
+            }
+          });
         }
         connection.release();
       });
