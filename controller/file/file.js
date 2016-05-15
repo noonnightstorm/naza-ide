@@ -80,13 +80,13 @@ function addFile(params) {
   });
 }
 
-function delFile(id) {
+function delFile(params) {
   // get file first
-  return getFileList(id).then(function(list) {
+  return getFileList(params).then(function(list) {
     var ids = list.data.map(function(item) {
       return item.id;
     });
-    ids.push(id);
+    ids.push(params.fileId);
     return ids;
   }).then(function(ids) {
     var queue = [];
