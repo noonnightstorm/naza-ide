@@ -206,7 +206,7 @@ function signUp(params) {
               data: {
                 uid: rows.insertId,
                 name: params.name,
-                token: JWT.encode(rows[0].id)
+                token: JWT.encode(rows.insertId)
               }
             });
             connection.release();
