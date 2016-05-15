@@ -6,6 +6,7 @@
   "dependencies": {
     "jsonwebtoken": "~6.2.0",
     "koa": "~1.2.0",
+    "koa-bearer-token": "~0.1.2",
     "koa-better-body": "~2.0.1",
     "koa-cors": "0.0.16",
     "koa-router": "~5.4.0",
