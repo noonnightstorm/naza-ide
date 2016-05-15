@@ -4,13 +4,14 @@ var cors = require('koa-cors');
 var body = require('koa-better-body');
 var bearerToken = require('koa-bearer-token');
 
-//允许跨域 todo 只允许部分域
+//cors
 app.use(cors());
 
 //body param
 app.use(body());
 app.use(bearerToken());
 
+//token verify
 app.use(function*(next) {
 
   if (/\/api\/*/.test(this.request.path)) {
@@ -39,7 +40,7 @@ app.use(function*(next) {
   }
 });
 
-//路由设置
+//router
 var router = require("./router");
 app
   .use(router.routes())

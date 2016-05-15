@@ -1,7 +1,7 @@
 var router = require('koa-router')();
 var API = require("./controller/api");
 var _ = require("lodash");
-var JWT = require("./controller/login/jwt")
+var JWT = require("./controller/user/jwt")
 
 router.get('/', function*(next) {
   this.body = yield readFileThunk(__dirname + '/assets/index.html');
