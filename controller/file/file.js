@@ -4,6 +4,7 @@ var pool = require("../../db/pool");
 var SQL = require("../../db/sql");
 var _ = require("lodash");
 var JWT = require('../user/jwt');
+var Tool = require("../tool/tool");
 
 function getFileList(params) {
   return new Promise(function(resolve, reject) {
@@ -158,7 +159,7 @@ function updateFile(params) {
     var file = _.extend({}, data.data, params);
     var _updateFileSql = SQL.updateFile
       .replace("{name}", file.name)
-      .replace("{content}", file.content)
+      .replace("{content}", Tool.encodeCode(file.content))
       .replace("{fileId}", file.id);
     return new Promise(function(resolve, reject) {
       pool.getConnection(function(err, connection) {

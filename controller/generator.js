@@ -2,6 +2,7 @@
 
 var User = require("./user/user");
 var File = require("./file/file");
+var Tool = require("./tool/tool");
 
 function helloworld(params) {
   return User.signUp(params).then(function(data) {
@@ -110,28 +111,7 @@ function _readFile(path) {
   var content = "";
   try {
     content = Fs.readFileSync(path, 'utf-8');
-    content = content.replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, function(char) {
-      switch (char) {
-        case "\0":
-          return "\\0";
-        case "\x08":
-          return "\\b";
-        case "\x09":
-          return "\\t";
-        case "\x1a":
-          return "\\z";
-        case "\n":
-          return "\\n";
-        case "\r":
-          return "\\r";
-        case "\"":
-        case "'":
-        case "\\":
-        case "%":
-          return "\\" + char; // prepends a backslash to backslash, percent,
-          // and double/single quotes
-      }
-    });
+    content = Tool.encodeCode(content);
   } catch (e) {
     console.log(e);
   }
