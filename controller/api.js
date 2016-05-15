@@ -1,6 +1,8 @@
 var pool = require("../db/pool");
 var SQL = require("../db/sql");
 
+var JWT = require('./login/jwt');
+
 // 文件列表的获取
 function getFileList(id) {
   return new Promise(function(resolve, reject) {
@@ -146,32 +148,6 @@ function updateFile(params) {
 
 }
 
-//免登接口
-function withoutLogin(id) {
-  return new Promise(function(resolve, reject) {
-    var _getUserSql = SQL.getUser.replace("{uid}", id);
-    pool.getConnection(function(err, connection) {
-      connection.query(_getUserSql, function(err, rows) {
-        if (err || rows.length === 0) {
-          reject({
-            code: 10000,
-            errMsg: "登录失败"
-          });
-        } else {
-          resolve({
-            code: 200,
-            data: {
-              id: rows[0].id,
-              name: rows[0].name
-            }
-          });
-        }
-        connection.release();
-      });
-    });
-  });
-}
-
 //登陆
 function login(param) {
   return new Promise(function(resolve, reject) {
@@ -196,7 +172,8 @@ function login(param) {
               code: 200,
               data: {
                 uid: rows[0].id,
-                name: rows[0].name
+                name: rows[0].name,
+                token: JWT.encode(rows[0].id)
               }
             });
           }
@@ -228,7 +205,8 @@ function signUp(params) {
               code: 200,
               data: {
                 uid: rows.insertId,
-                name: params.name
+                name: params.name,
+                token: JWT.encode(rows[0].id)
               }
             });
             connection.release();
@@ -263,7 +241,6 @@ module.exports = {
   getFileList: getFileList,
   addFile: addFile,
   delFile: delFile,
-  withoutLogin: withoutLogin,
   login: login,
   signUp: signUp
 };

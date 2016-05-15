@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "jsonwebtoken": "~6.2.0",
     "koa": "~1.2.0",
     "koa-better-body": "~2.0.1",
     "koa-cors": "0.0.16",

@@ -1,6 +1,7 @@
 var router = require('koa-router')();
 var API = require("./controller/api");
 var _ = require("lodash");
+var JWT = require("./controller/login/jwt")
 
 router.get('/', function*(next) {
   this.body = yield readFileThunk(__dirname + '/assets/index.html');
@@ -11,8 +12,10 @@ router.get("/login", function*(next) {
 });
 
 router.get("/api/withoutLogin", function*(next) {
-  var uid = this.cookies.get("uid");
-  if (uid) {
+  var token = this.request.token;
+  if (token) {
+    var uid = JWT.decode(this.request.token);
+    console.log(uid);
     this.body = yield API.withoutLogin(uid);
   } else {
     this.body = {
@@ -29,6 +32,7 @@ router.post("/api/login", function*(next) {
   });
   if (_.get(user, "code") === 200) {
     this.cookies.set('uid', _.get(user, "data.uid"), {
+      domain: "30.9.165.122",
       httpOnly: true
     });
   }
@@ -50,6 +54,8 @@ router.post("/api/signUp", function*(next) {
 });
 
 router.get('/api/getFileList', function*(next) {
+  // console.log(this.cookies.get("uid"));
+  console.log(this.request.header);
   var fileId = parseInt(_.get(this.request.query, "id") || -1);
   this.body = yield API.getFileList(fileId);
 });
@@ -66,6 +72,7 @@ router.delete('/api/delFile/:id', function*(next) {
 });
 
 router.post('/api/addFile', function*(next) {
+  console.log(this.cookies.get("uid"));
   this.body = yield API.addFile({
     uid: this.cookies.get("uid"),
     parentId: this.body.parentId || -1,
