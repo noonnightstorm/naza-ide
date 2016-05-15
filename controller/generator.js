@@ -54,11 +54,14 @@ var TYPE = {
 
 function folder(params) {
   return User.signUp(params).then(function(data) {
-    _create(Path.resolve(__dirname, "../folderTest/nz-editor"), data.data.uid, -1, allQueue);
+    if (data.code === 200) {
+      _create(Path.resolve(__dirname, "../folderTest/nz-editor"), data.data.uid, -1);
+    }
+    return data;
   });
 }
 
-function _create(path, uid, parentId, allQueue) {
+function _create(path, uid, parentId) {
   var fileList = Fs.readdirSync(path);
   var queue = [];
   //录入数据库
@@ -82,7 +85,6 @@ function _create(path, uid, parentId, allQueue) {
       promise: _promise
     });
   }
-  allQueue = allQueue.concat(queue);
   queue.forEach(function(item) {
     item.promise.then(function(data) {
       if (item.isFolder) {
