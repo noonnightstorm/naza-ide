@@ -11,6 +11,7 @@ function getFileList(id) {
           reject(err);
         } else {
           resolve({
+            code: 200,
             data: rows.map(function(item) {
               return {
                 id: item.id,
@@ -29,7 +30,6 @@ function getFileList(id) {
 
 // 文件的增删查改
 function addFile(params) {
-  console.log(params);
   //先添加进file表
   return new Promise(function(resolve, reject) {
     var _sql = SQL.addFile
@@ -42,7 +42,10 @@ function addFile(params) {
           reject(err);
         } else {
           resolve({
-            fileId: rows.insertId
+            code: 200,
+            data: {
+              fileId: rows.insertId
+            }
           });
         }
         connection.release();
@@ -60,7 +63,10 @@ function addFile(params) {
             reject(err);
           } else {
             resolve({
-              fileId: data.fileId
+              code: 200,
+              data: {
+                fileId: data.fileId
+              }
             });
           }
           connection.release();
@@ -174,12 +180,12 @@ function login(param) {
         } else {
           if (rows.length === 0) {
             resolve({
-              code: "10000",
+              code: 10000,
               errMsg: "登陆失败"
             });
           } else {
             resolve({
-              code: "200",
+              code: 200,
               data: {
                 uid: rows[0].id,
                 name: rows[0].name
@@ -211,8 +217,11 @@ function signUp(params) {
         pool.getConnection(function(err, connection) {
           connection.query(_sql, function(err, rows) {
             resolve({
-              uid: rows.insertId,
-              name: params.name
+              code: 200,
+              data: {
+                uid: rows.insertId,
+                name: params.name
+              }
             });
             connection.release();
           });

@@ -10,7 +10,7 @@ router.get("/login", function*(next) {
   this.body = yield readFileThunk(__dirname + '/assets/login.html');
 });
 
-router.get("/withoutLogin", function*(next) {
+router.get("/api/withoutLogin", function*(next) {
   var uid = this.cookies.get("uid");
   if (uid) {
     this.body = yield API.withoutLogin(uid);
@@ -27,7 +27,7 @@ router.post("/api/login", function*(next) {
     account: this.body.account,
     password: this.body.password
   });
-  this.cookies.set('uid', user.uid, {
+  this.cookies.set('uid', user.data.uid, {
     httpOnly: true
   });
   this.body = user;
@@ -39,7 +39,7 @@ router.post("/api/signUp", function*(next) {
     account: this.body.account,
     password: this.body.password
   });
-  this.cookies.set('uid', user.uid, {
+  this.cookies.set('uid', user.data.uid, {
     httpOnly: true
   });
   this.body = user;
