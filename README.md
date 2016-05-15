@@ -2,6 +2,12 @@
 
 ### Login
 
+* withoutLogin interface
+```
+path: /api/withoutLogin
+method: GET
+```
+
 * login interface
 
 ```
@@ -27,6 +33,7 @@ param: {
 
 ### File
 
+* get file list interface
 ```
 path: /api/getFileList
 method: GET
@@ -35,6 +42,7 @@ param: {
 }
 result:
 {
+  code: ,
   data: [{
   	id: ,
 	parentId: ,
@@ -42,5 +50,25 @@ result:
 	type: ,
 	content:
   }]
+}
+```
+
+* add file interface
+```
+path: /api/addFile
+method: POST
+param: {
+  parentId: ,
+  name: ,
+  type: 
+}
+```
+
+* delete file interface
+```
+path: /api/delFile/
+method: DELETE
+param: {
+  id:,
 }
 ```
