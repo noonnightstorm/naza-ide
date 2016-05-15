@@ -27,9 +27,11 @@ router.post("/api/login", function*(next) {
     account: this.body.account,
     password: this.body.password
   });
-  this.cookies.set('uid', user.data.uid, {
-    httpOnly: true
-  });
+  if (_.get(user, "code") === 200) {
+    this.cookies.set('uid', _.get(user, "data.uid"), {
+      httpOnly: true
+    });
+  }
   this.body = user;
 });
 
@@ -39,9 +41,11 @@ router.post("/api/signUp", function*(next) {
     account: this.body.account,
     password: this.body.password
   });
-  this.cookies.set('uid', user.data.uid, {
-    httpOnly: true
-  });
+  if (_.get(user, "code") === 200) {
+    this.cookies.set('uid', _.get(user, "data.uid"), {
+      httpOnly: true
+    });
+  }
   this.body = user;
 });
 
